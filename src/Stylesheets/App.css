@@ -1,14 +1,35 @@
+:root {
+  --main-color: #009688;
+  --optional-color: #00897b;
+  --accent-color: #282c34;
+  --secondary-color: #282c34;
+  --accent-color-hover: #424855;
+  --default-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  --body-background: #282c34;
+}
+input {
+  box-shadow: var(--default-shadow);
+  padding: 12px;
+  border-radius: 8px 0 0 8px;
+  border: 0;
+}
+input:focus {
+  outline: none;
+  border: 1px var(--main-color);
+}
 button {
   color: #fff;
-  background-color: rgb(109, 163, 224);
-  border: 2px solid rgb(109, 163, 224);
+  background-color: var(--accent-color);
+  border: 2px solid var(--accent-color);
   cursor: pointer;
-  border-radius: 8px;
-  transition: 0.25s ease;
+  border-radius: 6px;
+  transition: 0.4s ease all;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
 }
 button:hover {
-  color: rgb(109, 163, 224);
-  background-color: transparent;
+  background-color: var(--accent-color-hover);
+
+  border: 2px solid var(--accent-color-hover);
 }
 button:disabled,
 button:disabled:hover {
@@ -17,6 +38,16 @@ button:disabled:hover {
   color: #666666;
   cursor: default;
 }
+.App {
+  text-align: center;
+  min-height: 100vh;
+  background-color: var(--optional-color);
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+}
+
 .color-red {
   color: red;
 }
@@ -29,19 +60,11 @@ button:disabled:hover {
 .color-black {
   color: black;
 }
-.App {
-  text-align: center;
-  min-height: 100vh;
-  background-color: #32363f;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  color: white;
-}
 
 .heading {
   font-size: 3rem;
   margin: 2rem 0 0 0;
+  font-weight: lighter;
 }
 .sub-heading {
   font-size: 1rem;
@@ -57,16 +80,21 @@ button:disabled:hover {
   margin: 3rem 0 1.2rem 0;
 }
 .App-header {
-  background-color: #32363f;
+  background-color: var(--optional-color);
   min-height: 10%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: white;
+  font-size: 1rem;
+}
+.game-header {
+  position: fixed;
+  width: 100%;
 }
 .App-body {
-  background-color: #282c34;
+  background-color: var(--body-background);
   align-items: center;
   justify-content: center;
   font-size: 3rem;
@@ -78,13 +106,10 @@ button:disabled:hover {
 .hidden {
   display: none;
 }
-.player-input {
-  padding: 0.7rem;
-  border-radius: 8px 0 0 8px;
-}
+
 .main-menu {
   width: 50%;
-  margin: 5rem auto 0 auto;
+  margin: 2rem auto 0 auto;
 }
 .main-menu td {
   width: 50%;
@@ -108,7 +133,8 @@ button:disabled:hover {
   padding: 0.6rem 0.6rem;
 }
 .add-btn:hover {
-  color: #43a047;
+  background-color: #38863b;
+  border-color: #38863b;
 }
 .btn-filler {
   padding: 10px;
@@ -120,8 +146,8 @@ button:disabled:hover {
   margin: 5px;
 }
 .hit-btn:hover {
-  background-color: transparent;
-  color: green;
+  background-color: rgb(2, 94, 2);
+  border-color: rgb(2, 94, 2);
 }
 .stand-btn {
   background-color: #07f;
@@ -130,8 +156,8 @@ button:disabled:hover {
   margin: 5px;
 }
 .stand-btn:hover {
-  background-color: transparent;
-  color: #07f;
+  background-color: rgb(3, 86, 180);
+  border-color: rgb(3, 86, 180);
 }
 .remove-btn {
   float: right;
@@ -141,19 +167,19 @@ button:disabled:hover {
   padding: 0rem 0.2rem;
 }
 .remove-btn:hover {
-  color: #d32f2f;
+  background-color: #b42828;
+  border-color: #b42828;
 }
 .menu-btn {
   padding: 10px 13px;
-  margin: 1rem 1rem;
+  margin: 0.4rem 1rem;
   font-size: 1rem;
-  font-weight: bold;
 }
 .start-btn {
-  padding: 10px 13px;
+  padding: 18px 20px;
   margin: 5rem 0 0 0;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: lighter;
 }
 .player-label {
   font-size: 1.5rem;
@@ -190,7 +216,7 @@ button:disabled:hover {
     linear-gradient(245deg, transparent 75%, rgba(255, 255, 255, 0.8) 75%) 0 0,
     linear-gradient(115deg, transparent 75%, rgba(255, 255, 255, 0.8) 75%) 7px -15px,
     linear-gradient(245deg, transparent 75%, rgba(255, 255, 255, 0.8) 75%) 7px -15px,
-    #36c;
+    rgb(0, 204, 255);
   background-size: 15px 30px;
   /*border: 2rem solid white;*/
   box-shadow: inset 0 0 0px 6px #ffffff;
