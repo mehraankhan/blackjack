@@ -259,23 +259,17 @@ tbody {
 }
 @media only screen and (max-width: 650px) {
   .col-2 {
-    width: 100% !important;
+    width: 100%;
   }
   .player-row {
     flex-wrap: wrap;
   }
   .card {
-    width: 70px;
-    height: 100px;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: aliceblue;
-    text-align: center;
-    margin: 10px;
-    font-family: serif;
+    width: 40px;
+    height: 60px;
   }
   .card-top {
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     height: 10%;
     text-align: center;
   }
@@ -284,12 +278,15 @@ tbody {
     margin-left: 0px;
   }
   .card-middle {
-    font-size: 3rem;
+    font-size: 1.8rem;
     margin: auto;
     height: 80%;
   }
   .card-bottom {
     /*margin-top: 100%;*/
     display: none;
+  }
+  .player-label {
+    font-size: 1rem;
   }
 }
