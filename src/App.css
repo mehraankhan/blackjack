@@ -1,3 +1,11 @@
+@media only screen and (max-width: 650px) {
+  .col-2 {
+    width: 100% !important;
+  }
+  .player-row {
+    flex-wrap: wrap;
+  }
+}
 button {
   color: #fff;
   background-color: rgb(109, 163, 224);
