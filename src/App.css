@@ -113,10 +113,24 @@ button:disabled:hover {
   color: #43a047;
 }
 .hit-btn {
-  color: #43a047;
+  background-color: green;
+  border: green;
+  padding: 2px 8px;
+  margin: 5px;
+}
+.hit-btn:hover {
+  background-color: transparent;
+  color: green;
 }
 .stand-btn {
-  color: #43a047;
+  background-color: Yellow;
+  border: yellow;
+  padding: 2px 8px;
+  margin: 5px;
+}
+.stand-btn:hover {
+  background-color: transparent;
+  color: Yellow;
 }
 .remove-btn {
   float: right;
@@ -267,9 +281,10 @@ tbody {
   .card {
     width: 40px;
     height: 60px;
+    margin: 3px;
   }
   .card-top {
-    font-size: 1.2rem;
+    font-size: 1rem;
     height: 10%;
     text-align: center;
   }
@@ -278,7 +293,7 @@ tbody {
     margin-left: 0px;
   }
   .card-middle {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     margin: auto;
     height: 80%;
   }

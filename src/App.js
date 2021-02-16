@@ -239,6 +239,7 @@ function PlayerSeat(props) {
           }
         >
           <button
+            className="hit-btn"
             onClick={() => {
               props.onHitMe(player);
             }}
@@ -246,6 +247,7 @@ function PlayerSeat(props) {
             Hit me!
           </button>
           <button
+            className="stand-btn"
             onClick={() => {
               props.onStand(player);
             }}
