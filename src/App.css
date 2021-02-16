@@ -15,6 +15,7 @@ button:disabled:hover {
   border-color: #cccccc;
   background-color: #cccccc;
   color: #666666;
+  cursor: default;
 }
 .color-red {
   color: red;
@@ -24,6 +25,9 @@ button:disabled:hover {
 }
 .color-yellow {
   color: yellow;
+}
+.color-black {
+  color: black;
 }
 .App {
   text-align: center;
@@ -59,13 +63,10 @@ button:disabled:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   color: white;
 }
 .App-body {
   background-color: #282c34;
-  /* height: 90%;*/
-  /*display: flex;*/
   align-items: center;
   justify-content: center;
   font-size: 3rem;
@@ -73,9 +74,6 @@ button:disabled:hover {
 }
 .col-2 {
   width: 50%;
-}
-.col-3 {
-  width: 33.333%;
 }
 .hidden {
   display: none;
@@ -111,6 +109,9 @@ button:disabled:hover {
 }
 .add-btn:hover {
   color: #43a047;
+}
+.btn-filler {
+  padding: 10px;
 }
 .hit-btn {
   background-color: green;
@@ -159,7 +160,6 @@ button:disabled:hover {
 }
 .player-row {
   display: flex;
-  /*flex-wrap: wrap;*/
   align-items: center;
   justify-content: center;
   font-size: 3rem;
@@ -214,43 +214,11 @@ button:disabled:hover {
   height: 80%;
 }
 .card-bottom {
-  /*margin-top: 100%;*/
   width: 100%;
 }
 .card-bottom td {
   float: right;
   margin-right: 5px;
-}
-.card > span {
-  font-size: 1.6rem;
-}
-.card-back {
-  line-height: 160px;
-  /*background-image: linear-gradient(
-    -225deg,
-    #69eacb 0%,
-    #eaccf8 48%,
-    #6654f1 100%
-  );*/
-  background: linear-gradient(
-        115deg,
-        transparent 75%,
-        rgba(255, 255, 255, 0.8) 75%
-      )
-      0 0,
-    linear-gradient(245deg, transparent 75%, rgba(255, 255, 255, 0.8) 75%) 0 0,
-    linear-gradient(115deg, transparent 75%, rgba(255, 255, 255, 0.8) 75%) 7px -15px,
-    linear-gradient(245deg, transparent 75%, rgba(255, 255, 255, 0.8) 75%) 7px -15px,
-    #36c;
-  background-size: 15px 30px;
-  /*border: 2rem solid white;*/
-  box-shadow: inset 0 0 0px 11px #ffffff;
-}
-.card-red {
-  color: rgb(228, 17, 17);
-}
-.card-black {
-  color: rgb(19, 19, 19);
 }
 
 .hand {
@@ -263,10 +231,7 @@ button:disabled:hover {
   margin: auto;
   width: fit-content;
 }
-/*.player-block {
-  width: 50%;
-}
-*/
+
 table,
 tbody {
   width: 100%;
@@ -298,7 +263,6 @@ tbody {
     height: 80%;
   }
   .card-bottom {
-    /*margin-top: 100%;*/
     display: none;
   }
   .player-label {

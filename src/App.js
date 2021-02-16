@@ -22,19 +22,20 @@ function Header(props) {
   );
 }
 function MainMenu(props) {
-  let [playerNames, setPlayerNames] = useState([
-    "Billy",
-    "Lemmy",
-    "Andrew",
-    "Carla",
-  ]);
+  let [playerNames, setPlayerNames] = useState(() => {
+    if (props.players)
+      return props.players.map((player) => {
+        return player.playerName;
+      });
+    else return [];
+  });
   let [newPlayer, setNewPlayer] = useState("");
   let inputRef = React.createRef();
-  let addBtnRef = React.createRef();
 
   useEffect(() => {
     inputRef.current.focus();
   }, [newPlayer]);
+
   function addPlayerName(playerName) {
     let newPlayerNames = [...playerNames];
     newPlayerNames.push(playerName);
@@ -76,7 +77,7 @@ function MainMenu(props) {
             <tr>
               <td>
                 <div className="add-player">
-                  <form onsubmit={() => addPlayerName(newPlayer)}>
+                  <form onSubmit={() => addPlayerName(newPlayer)}>
                     <input
                       placeholder="New player name"
                       onChange={handleChange}
@@ -96,21 +97,27 @@ function MainMenu(props) {
                 </div>
                 <h6 className="list-heading">Players</h6>
                 <ol className="player-list">
-                  {playerNames.map((playerName, index) => {
-                    return (
-                      <li>
-                        {playerName}
-                        <button
-                          className="remove-btn"
-                          onClick={() => {
-                            removePlayerName(index);
-                          }}
-                        >
-                          X
-                        </button>
-                      </li>
-                    );
-                  })}
+                  {playerNames.length === 0 ? (
+                    <div style={{ textAlign: "center", color: "red" }}>
+                      Please add a player
+                    </div>
+                  ) : (
+                    playerNames.map((playerName, index) => {
+                      return (
+                        <li>
+                          {playerName}
+                          <button
+                            className="remove-btn"
+                            onClick={() => {
+                              removePlayerName(index);
+                            }}
+                          >
+                            X
+                          </button>
+                        </li>
+                      );
+                    })
+                  )}
                 </ol>
               </td>
             </tr>
@@ -120,30 +127,7 @@ function MainMenu(props) {
     </div>
   );
 }
-//generate deck of cards
-function generateDeck() {
-  const Suits = ["♠", "♣", "♥", "♦"];
-  const Values = [
-    "A",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "J",
-    "Q",
-    "K",
-  ];
-  return Suits.flatMap((suit) => {
-    return Values.map((value) => {
-      return { suit, value };
-    });
-  });
-}
+
 function Card(props) {
   let [suit, setSuit] = useState(props.suit);
   let [value, setValue] = useState(props.value);
@@ -166,8 +150,8 @@ function Card(props) {
         !suit || !value
           ? "card card-flipped"
           : suit === "♥" || suit === "♦"
-          ? "card card-red"
-          : "card card-black"
+          ? "card color-red"
+          : "card color-black"
       }
     >
       <table className="card-main-container">
@@ -196,7 +180,7 @@ function PlayerSeat(props) {
       props.players.forEach((player) => {
         if (player.currentPlayer) {
           document
-            .getElementById(`player-block-${player.id}`)
+            .getElementById(`player-block-${player.key}`)
             .scrollIntoView({ behavior: "smooth" });
         }
       });
@@ -210,7 +194,7 @@ function PlayerSeat(props) {
     else if (player.status === "L") labelClass = "color-red";
 
     return (
-      <div id={`player-block-${player.id}`} className="player-block">
+      <div id={`player-block-${player.key}`} className="player-block">
         <div className={player.currentPlayer ? "hand current-player" : "hand"}>
           {player.type === "D" ? (
             <div className="player-label">
@@ -233,16 +217,15 @@ function PlayerSeat(props) {
             })}
           </div>
         </div>
-        <div
-          className={
-            player.currentPlayer && player.type === "P" ? "" : "hidden"
-          }
-        >
+        <div className={player.type === "D" ? "hidden" : ""}>
           <button
             className="hit-btn"
             onClick={() => {
               props.onHitMe(player);
             }}
+            disabled={
+              player.currentPlayer && player.type === "P" ? false : true
+            }
           >
             Hit me!
           </button>
@@ -251,6 +234,9 @@ function PlayerSeat(props) {
             onClick={() => {
               props.onStand(player);
             }}
+            disabled={
+              player.currentPlayer && player.type === "P" ? false : true
+            }
           >
             Stand
           </button>
@@ -273,18 +259,11 @@ function PlayerSeat(props) {
 }
 
 class Deck {
-  constructor(cards = generateDeck()) {
-    this.cards = cards;
+  constructor() {
+    this.cards = this.generateDeck();
     this.shuffle();
   }
 
-  addDeck() {
-    let newCards = generateDeck();
-    this.cards.forEach((card) => {
-      newCards.push(card);
-    });
-    this.cards = [...newCards];
-  }
   shuffle() {
     for (let i = this.cards.length - 1; i > 0; i--) {
       //get a random integer between 0 and i
@@ -294,11 +273,34 @@ class Deck {
       this.cards[i] = oldValue;
     }
   }
+  generateDeck() {
+    const Suits = ["♠", "♣", "♥", "♦"];
+    const Values = [
+      "A",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "J",
+      "Q",
+      "K",
+    ];
+    return Suits.flatMap((suit) => {
+      return Values.map((value) => {
+        return { suit, value };
+      });
+    });
+  }
 }
 class Player {
-  constructor(playerName, type, id) {
+  constructor(playerName, type, key) {
     this.props = {
-      id: id,
+      key: key,
       playerName: playerName,
       cards: [], //array of cards
       type: type,
@@ -308,18 +310,11 @@ class Player {
     };
   }
   //getters
-  get id() {
-    return this.props.id;
+  get key() {
+    return this.props.key;
   }
   get cards() {
     return this.props.cards;
-  }
-  get cardsStr() {
-    let ret = "";
-    for (let i = 0; i < this.cards.length; i++) {
-      ret += `${this.cards[i].value} of ${this.cards[i].suit} | `;
-    }
-    return ret;
   }
   //score is derived
   get score() {
@@ -387,7 +382,7 @@ class Player {
     this.statusMessage = "STAND";
     this.status = "S";
   }
-  //determine state of player
+  //determine status of player
   determineStatusMessage() {
     let score = this.score;
     let newStatus;
@@ -414,63 +409,44 @@ export default function App() {
   let [deck, setDeck] = useState("");
 
   useEffect(() => {
+    //If the dealers turn then deal to dealer
     if (dealer.currentPlayer) {
       playDealer();
     }
   }, [dealer.currentPlayer]);
 
   useEffect(() => {
-    console.log("In deck cards use effect", deck);
     if (deck) {
       if (deck.cards.length < 5) {
-        addDeck();
+        setDeck(addDeck(deck));
       }
     }
   }, [deck]);
 
-  function noOfPlayers() {
-    return players.length;
-  }
   function drawCard() {
-    let cardToReturn;
-    console.log("old deck is ", deck);
     let newDeck = { ...deck };
-    console.log("new deck is ", newDeck);
-    cardToReturn = newDeck.cards.pop();
+    let cardToReturn = newDeck.cards.pop();
     setDeck(newDeck);
     return cardToReturn;
   }
 
   function newGame(playerNames) {
-    //create and shuffle
+    //create deck
     let deck = new Deck();
-    deck.shuffle();
 
-    //Create player profiles - map new player objects to the players array
-    let newPlayers = [];
-    if (playerNames) {
-      newPlayers = playerNames.map((playerName, index) => {
-        return new Player(playerName, "P", index);
-      });
-    } else {
-      let newPlayerNames = players.map((player) => {
-        return player.playerName;
-      });
-      newPlayers = newPlayerNames.map((playerName, index) => {
-        return new Player(playerName, "P", index);
-      });
-    }
+    //Create players and dealer
+    let newPlayers = playerNames.map((playerName, index) => {
+      return new Player(playerName, "P", index);
+    });
     let newDealer = new Player("Dealer", "D", -1);
 
-    //deal initial
-
+    //deal initial cards
     for (let i = 0; i < 2; i++) {
       //deal 1 card to players
       newPlayers.forEach((player) => {
+        //If running out of cards, add another deck
         if (deck.cards.length < 5) {
-          console.log("proper deck", deck);
-          deck.addDeck();
-          console.log("proper deck after", deck);
+          deck = addDeck(deck);
         }
         player.hit(deck.cards.pop());
       });
@@ -478,10 +454,10 @@ export default function App() {
       newDealer.hit(deck.cards.pop());
     }
 
+    //Check if first player is a winner
     newPlayers[0].currentPlayer = true;
     if (newPlayers[0].status === "W") {
-      console.log("changing player", newPlayers[0].status, newPlayers[0]);
-      let ret = nextPlayer(newPlayers[0].id + 1, newPlayers, newDealer);
+      let ret = nextPlayer(newPlayers[0].key + 1, newPlayers, newDealer);
       newPlayers = ret.players;
       newDealer = ret.dealer;
     }
@@ -494,16 +470,17 @@ export default function App() {
   function hitMe(player) {
     player.hit(drawCard());
     let newStatusMessage = player.statusMessage;
+    //If players turn is over, focus on next player
     if (newStatusMessage !== "0") {
-      let ret = nextPlayer(player.id + 1, players, dealer);
+      let ret = nextPlayer(player.key + 1, players, dealer);
       setPlayers(ret.players);
       setDealer(ret.dealer);
     }
   }
   function stand(player) {
     player.stand();
-
-    let ret = nextPlayer(player.id + 1, players, dealer);
+    //focus on next player
+    let ret = nextPlayer(player.key + 1, players, dealer);
     setPlayers(ret.players);
     setDealer(ret.dealer);
   }
@@ -553,10 +530,9 @@ export default function App() {
         player.currentPlayer = false;
       });
       newDealer.currentPlayer = true;
-      // setDealer(newDealer);
     } else {
       for (let i = 0; i < newPlayers.length; i++) {
-        if (newPlayers[i].id === nextPlayerId) {
+        if (newPlayers[i].key === nextPlayerId) {
           if (newPlayers[i].status === "W") {
             nextPlayer(nextPlayerId + 1, newPlayers, newDealer);
             break;
@@ -570,15 +546,13 @@ export default function App() {
     }
     return { players: newPlayers, dealer: newDealer };
   }
-  function addDeck() {
+  function addDeck(pDeck) {
     let newDeck = new Deck();
-    newDeck.shuffle();
-
-    deck.cards.forEach((card) => {
+    pDeck.cards.forEach((card) => {
       newDeck.cards.push(card);
     });
 
-    setDeck(newDeck);
+    return newDeck;
   }
   function toMenu() {
     setStatus("MENU");
@@ -586,7 +560,7 @@ export default function App() {
   return (
     <div className="App">
       {status === "MENU" ? (
-        <MainMenu onNewGame={newGame} />
+        <MainMenu onNewGame={newGame} players={players} />
       ) : (
         <div>
           <Header
