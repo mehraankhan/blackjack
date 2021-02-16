@@ -1,0 +1,259 @@
+button {
+  color: #fff;
+  background-color: rgb(109, 163, 224);
+  border: 2px solid rgb(109, 163, 224);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.25s ease;
+}
+button:hover {
+  color: rgb(109, 163, 224);
+  background-color: transparent;
+}
+button:disabled,
+button:disabled:hover {
+  border-color: #cccccc;
+  background-color: #cccccc;
+  color: #666666;
+}
+.color-red {
+  color: red;
+}
+.color-green {
+  color: green;
+}
+.color-yellow {
+  color: yellow;
+}
+.App {
+  text-align: center;
+  min-height: 100vh;
+  background-color: #32363f;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+}
+
+.heading {
+  font-size: 3rem;
+  margin: 2rem 0 0 0;
+}
+.sub-heading {
+  font-size: 1rem;
+  font-weight: lighter;
+}
+.heading.game,
+.sub-heading {
+  margin: 0;
+}
+.list-heading {
+  font-size: 2rem;
+  font-weight: normal;
+  margin: 3rem 0 1.2rem 0;
+}
+.App-header {
+  background-color: #32363f;
+  min-height: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+}
+.App-body {
+  background-color: #282c34;
+  /* height: 90%;*/
+  /*display: flex;*/
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+}
+.col-2 {
+  width: 50%;
+}
+.col-3 {
+  width: 33.333%;
+}
+.hidden {
+  display: none;
+}
+.player-input {
+  padding: 0.7rem;
+  border-radius: 8px 0 0 8px;
+}
+.main-menu {
+  width: 50%;
+  margin: 5rem auto 0 auto;
+}
+.main-menu td {
+  width: 50%;
+}
+.player-list {
+  font-size: 1.2rem;
+  text-align: left;
+  width: 300px;
+  margin: 0 auto 0 auto;
+  padding: 2rem;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+}
+.add-player {
+  text-align: top;
+}
+.add-btn {
+  background-color: #43a047;
+  border: 2px solid #43a047;
+  border-radius: 0px 8px 8px 0px;
+  padding: 0.6rem 0.6rem;
+}
+.add-btn:hover {
+  color: #43a047;
+}
+.hit-btn {
+  color: #43a047;
+}
+.stand-btn {
+  color: #43a047;
+}
+.remove-btn {
+  float: right;
+  background-color: #d32f2f;
+  border: 2px solid #d32f2f;
+  border-radius: 100%;
+  padding: 0rem 0.2rem;
+}
+.remove-btn:hover {
+  color: #d32f2f;
+}
+.menu-btn {
+  padding: 10px 13px;
+  margin: 1rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.start-btn {
+  padding: 10px 13px;
+  margin: 5rem 0 0 0;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.player-label {
+  font-size: 1.5rem;
+}
+.player-row {
+  display: flex;
+  /*flex-wrap: wrap;*/
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+}
+.current-player {
+  border: 2px solid yellow;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 0, 0.027);
+}
+.card {
+  width: 80px;
+  height: 130px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: aliceblue;
+  text-align: center;
+  margin: 10px;
+  font-family: serif;
+}
+.card-flipped {
+  background: linear-gradient(
+        115deg,
+        transparent 75%,
+        rgba(255, 255, 255, 0.8) 75%
+      )
+      0 0,
+    linear-gradient(245deg, transparent 75%, rgba(255, 255, 255, 0.8) 75%) 0 0,
+    linear-gradient(115deg, transparent 75%, rgba(255, 255, 255, 0.8) 75%) 7px -15px,
+    linear-gradient(245deg, transparent 75%, rgba(255, 255, 255, 0.8) 75%) 7px -15px,
+    #36c;
+  background-size: 15px 30px;
+  /*border: 2rem solid white;*/
+  box-shadow: inset 0 0 0px 6px #ffffff;
+}
+.card-main-container {
+  width: 100%;
+  height: 100%;
+}
+.card-top,
+.card-bottom {
+  font-size: 1.2rem;
+  height: 10%;
+}
+.card-top td {
+  float: left;
+  margin-left: 5px;
+}
+.card-middle {
+  font-size: 4rem;
+  margin: auto;
+  height: 80%;
+}
+.card-bottom {
+  /*margin-top: 100%;*/
+  width: 100%;
+}
+.card-bottom td {
+  float: right;
+  margin-right: 5px;
+}
+.card > span {
+  font-size: 1.6rem;
+}
+.card-back {
+  line-height: 160px;
+  /*background-image: linear-gradient(
+    -225deg,
+    #69eacb 0%,
+    #eaccf8 48%,
+    #6654f1 100%
+  );*/
+  background: linear-gradient(
+        115deg,
+        transparent 75%,
+        rgba(255, 255, 255, 0.8) 75%
+      )
+      0 0,
+    linear-gradient(245deg, transparent 75%, rgba(255, 255, 255, 0.8) 75%) 0 0,
+    linear-gradient(115deg, transparent 75%, rgba(255, 255, 255, 0.8) 75%) 7px -15px,
+    linear-gradient(245deg, transparent 75%, rgba(255, 255, 255, 0.8) 75%) 7px -15px,
+    #36c;
+  background-size: 15px 30px;
+  /*border: 2rem solid white;*/
+  box-shadow: inset 0 0 0px 11px #ffffff;
+}
+.card-red {
+  color: rgb(228, 17, 17);
+}
+.card-black {
+  color: rgb(19, 19, 19);
+}
+
+.hand {
+  display: block;
+  flex-wrap: wrap;
+  margin: 20px 20px 0px 20px;
+}
+.card-container {
+  display: flex;
+  margin: auto;
+  width: fit-content;
+}
+/*.player-block {
+  width: 50%;
+}
+*/
+table,
+tbody {
+  width: 100%;
+}
