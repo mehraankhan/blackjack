@@ -275,13 +275,18 @@ function PlayerSeat(props) {
 class Deck {
   constructor(cards = generateDeck()) {
     this.cards = cards;
+    this.shuffle();
   }
 
-  get size() {
-    return this.cards.length;
+  addDeck() {
+    let newCards = generateDeck();
+    this.cards.forEach((card) => {
+      newCards.push(card);
+    });
+    this.cards = [...newCards];
   }
   shuffle() {
-    for (let i = this.size - 1; i > 0; i--) {
+    for (let i = this.cards.length - 1; i > 0; i--) {
       //get a random integer between 0 and i
       const newIndex = Math.floor(Math.random() * (i + 1));
       const oldValue = this.cards[newIndex];
@@ -414,12 +419,23 @@ export default function App() {
     }
   }, [dealer.currentPlayer]);
 
+  useEffect(() => {
+    console.log("In deck cards use effect", deck);
+    if (deck) {
+      if (deck.cards.length < 5) {
+        addDeck();
+      }
+    }
+  }, [deck]);
+
   function noOfPlayers() {
     return players.length;
   }
   function drawCard() {
     let cardToReturn;
+    console.log("old deck is ", deck);
     let newDeck = { ...deck };
+    console.log("new deck is ", newDeck);
     cardToReturn = newDeck.cards.pop();
     setDeck(newDeck);
     return cardToReturn;
@@ -451,6 +467,11 @@ export default function App() {
     for (let i = 0; i < 2; i++) {
       //deal 1 card to players
       newPlayers.forEach((player) => {
+        if (deck.cards.length < 5) {
+          console.log("proper deck", deck);
+          deck.addDeck();
+          console.log("proper deck after", deck);
+        }
         player.hit(deck.cards.pop());
       });
       //then deal 1 card to dealer
@@ -548,6 +569,16 @@ export default function App() {
       }
     }
     return { players: newPlayers, dealer: newDealer };
+  }
+  function addDeck() {
+    let newDeck = new Deck();
+    newDeck.shuffle();
+
+    deck.cards.forEach((card) => {
+      newDeck.cards.push(card);
+    });
+
+    setDeck(newDeck);
   }
   function toMenu() {
     setStatus("MENU");
