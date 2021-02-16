@@ -144,6 +144,7 @@ button:disabled:hover {
   border-color: green;
   padding: 2px 8px;
   margin: 5px;
+  font-size: 1.1rem;
 }
 .hit-btn:hover {
   background-color: rgb(2, 94, 2);
@@ -154,6 +155,7 @@ button:disabled:hover {
   border-color: #07f;
   padding: 2px 8px;
   margin: 5px;
+  font-size: 1.1rem;
 }
 .stand-btn:hover {
   background-color: rgb(3, 86, 180);
@@ -182,7 +184,7 @@ button:disabled:hover {
   font-weight: lighter;
 }
 .player-label {
-  font-size: 1.5rem;
+  font-size: 1.1rem;
 }
 .player-row {
   display: flex;
@@ -192,7 +194,7 @@ button:disabled:hover {
   color: white;
 }
 .current-player {
-  border: 2px solid yellow;
+  border: 1px solid yellow;
   border-radius: 8px;
   background-color: rgba(255, 255, 0, 0.027);
 }
