@@ -114,7 +114,7 @@ button:disabled:hover {
 }
 .hit-btn {
   background-color: green;
-  border: green;
+  border-color: green;
   padding: 2px 8px;
   margin: 5px;
 }
@@ -123,14 +123,14 @@ button:disabled:hover {
   color: green;
 }
 .stand-btn {
-  background-color: Yellow;
-  border: yellow;
+  background-color: #07f;
+  border-color: #07f;
   padding: 2px 8px;
   margin: 5px;
 }
 .stand-btn:hover {
   background-color: transparent;
-  color: Yellow;
+  color: #07f;
 }
 .remove-btn {
   float: right;
