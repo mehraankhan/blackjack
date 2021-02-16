@@ -1,11 +1,3 @@
-@media only screen and (max-width: 650px) {
-  .col-2 {
-    width: 100% !important;
-  }
-  .player-row {
-    flex-wrap: wrap;
-  }
-}
 button {
   color: #fff;
   background-color: rgb(109, 163, 224);
@@ -264,4 +256,40 @@ button:disabled:hover {
 table,
 tbody {
   width: 100%;
+}
+@media only screen and (max-width: 650px) {
+  .col-2 {
+    width: 100% !important;
+  }
+  .player-row {
+    flex-wrap: wrap;
+  }
+  .card {
+    width: 70px;
+    height: 100px;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: aliceblue;
+    text-align: center;
+    margin: 10px;
+    font-family: serif;
+  }
+  .card-top {
+    font-size: 1.6rem;
+    height: 10%;
+    text-align: center;
+  }
+  .card-top td {
+    float: none;
+    margin-left: 0px;
+  }
+  .card-middle {
+    font-size: 3rem;
+    margin: auto;
+    height: 80%;
+  }
+  .card-bottom {
+    /*margin-top: 100%;*/
+    display: none;
+  }
 }
