@@ -41,17 +41,20 @@ export default function MainMenu(props) {
       <header className="App-header">
         <h1 className="heading">Blackjack</h1>
         <h2 className="sub-heading">by Mehraan Ahmed Khan</h2>
-        <button
-          className="start-btn"
-          onClick={() => props.onNewGame(playerNames)}
-          disabled={playerNames.length === 0 ? true : false}
-        >
-          Start Game
-        </button>
       </header>
       <body>
         <table className="main-menu">
           <tbody>
+            <tr>
+              {" "}
+              <button
+                className="start-btn"
+                onClick={() => props.onNewGame(playerNames)}
+                disabled={playerNames.length === 0 ? true : false}
+              >
+                Start Game
+              </button>
+            </tr>
             <tr>
               <td>
                 <div className="add-player">
