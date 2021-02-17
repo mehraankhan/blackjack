@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 export default function Header(props) {
   return (
-    <header className="App-header game-header">
+    <header className="App-header">
       <div>
         <button className="menu-btn" onClick={props.onMenuClick}>
           Main menu
